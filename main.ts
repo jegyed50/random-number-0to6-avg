@@ -17,7 +17,7 @@ input.onButtonPressed(Button.B, function () {
         sum = sum + rnd
         runningavg = sum / (index + 1)
         datalogger.log(
-        datalogger.createCV("index", index),
+        datalogger.createCV("index", index + 1),
         datalogger.createCV("rnd", rnd),
         datalogger.createCV("running-avg", Math.round(runningavg * 100) / 100)
         )
