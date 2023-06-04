@@ -14,7 +14,7 @@ input.onButtonPressed(Button.B, function () {
     for (let index = 0; index <= 9999; index++) {
         rnd = randint(0, 6)
         sum = sum + rnd
-        runningavg = sum / (index - -1)
+        runningavg = sum / (index + 1)
         datalogger.log(
         datalogger.createCV("index", index),
         datalogger.createCV("rnd", rnd),
