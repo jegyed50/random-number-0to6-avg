@@ -14,10 +14,11 @@ input.onButtonPressed(Button.B, function () {
     for (let index = 0; index <= 9999; index++) {
         rnd = randint(0, 6)
         sum = sum + rnd
+        runningavg = sum / (index - -1)
         datalogger.log(
         datalogger.createCV("index", index),
         datalogger.createCV("rnd", rnd),
-        datalogger.createCV("avg", 0)
+        datalogger.createCV("running-avg", 0)
         )
     }
     avg = sum / 10000
@@ -28,6 +29,7 @@ input.onButtonPressed(Button.B, function () {
     datalogger.createCV("avg", avg)
     )
 })
+let runningavg = 0
 let avg = 0
 let rnd = 0
 let sum = 0
@@ -35,6 +37,7 @@ sum = 0
 datalogger.setColumnTitles(
 "index",
 "rnd",
+"running-avg",
 "avg"
 )
 datalogger.includeTimestamp(FlashLogTimeStampFormat.Seconds)
