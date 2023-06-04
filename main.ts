@@ -11,7 +11,7 @@ input.onButtonPressed(Button.A, function () {
 })
 // Log to SD card with DataLogger
 input.onButtonPressed(Button.B, function () {
-    led.plot(0, 0)
+    inprogressflag = true
     for (let index = 0; index <= rndcount - 1; index++) {
         rnd = randint(0, 6)
         sum = sum + rnd
@@ -19,7 +19,7 @@ input.onButtonPressed(Button.B, function () {
         datalogger.log(
         datalogger.createCV("index", index),
         datalogger.createCV("rnd", rnd),
-        datalogger.createCV("running-avg", runningavg)
+        datalogger.createCV("running-avg", Math.round(runningavg * 100) / 100)
         )
     }
     avg = sum / (rndcount - 1)
@@ -29,13 +29,16 @@ input.onButtonPressed(Button.B, function () {
     datalogger.createCV("rnd", 0),
     datalogger.createCV("avg", avg)
     )
+    inprogressflag = false
 })
 let runningavg = 0
+let inprogressflag = false
 let avg = 0
 let rnd = 0
 let rndcount = 0
 let sum = 0
 sum = 0
+// that much data can fit on the SD card
 rndcount = 5000
 datalogger.setColumnTitles(
 "index",
@@ -45,5 +48,7 @@ datalogger.setColumnTitles(
 )
 datalogger.includeTimestamp(FlashLogTimeStampFormat.Seconds)
 basic.forever(function () {
-	
+    if (inprogressflag) {
+        led.toggle(2, 2)
+    }
 })
