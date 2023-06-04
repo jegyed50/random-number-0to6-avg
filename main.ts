@@ -11,17 +11,18 @@ input.onButtonPressed(Button.A, function () {
 })
 // Log to SD card with DataLogger
 input.onButtonPressed(Button.B, function () {
-    for (let index = 0; index <= 9999; index++) {
+    led.plot(0, 0)
+    for (let index = 0; index <= rndcount - 1; index++) {
         rnd = randint(0, 6)
         sum = sum + rnd
         runningavg = sum / (index + 1)
         datalogger.log(
         datalogger.createCV("index", index),
         datalogger.createCV("rnd", rnd),
-        datalogger.createCV("running-avg", 0)
+        datalogger.createCV("running-avg", runningavg)
         )
     }
-    avg = sum / 10000
+    avg = sum / (rndcount - 1)
     basic.showNumber(avg)
     datalogger.log(
     datalogger.createCV("index", 0),
@@ -32,8 +33,10 @@ input.onButtonPressed(Button.B, function () {
 let runningavg = 0
 let avg = 0
 let rnd = 0
+let rndcount = 0
 let sum = 0
 sum = 0
+rndcount = 5000
 datalogger.setColumnTitles(
 "index",
 "rnd",
