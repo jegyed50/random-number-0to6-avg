@@ -1,7 +1,7 @@
 // Log with serial vrite value
 input.onButtonPressed(Button.A, function () {
     for (let index = 0; index <= 99; index++) {
-        rnd = randint(0, 6)
+        rnd = randint(1, 6)
         sum = sum + rnd
         serial.writeValue("rnd", rnd)
     }
@@ -13,7 +13,7 @@ input.onButtonPressed(Button.A, function () {
 input.onButtonPressed(Button.B, function () {
     inprogressflag = true
     for (let index = 0; index <= rndcount - 1; index++) {
-        rnd = randint(0, 6)
+        rnd = randint(1, 6)
         sum = sum + rnd
         runningavg = sum / (index + 1)
         datalogger.log(
